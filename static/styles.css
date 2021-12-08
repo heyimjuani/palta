@@ -15,6 +15,7 @@ html, body {
 #page-title {
   font-weight: 300;
   line-height: 1.3em;
+  margin-bottom: 0;
 }
 
 .logo {
@@ -43,7 +44,7 @@ html, body {
   background: #fff;
   color: #000;
 }
-.card.no-margin { margin-bottom: 0;}
+.card.no-margin { margin-bottom: 0; margin-top: 0;}
 .card .block {
   padding: 16px 20px;
   position: relative;
