@@ -278,7 +278,6 @@ a:hover {
   list-style: none;
   padding: 0;
   margin: 0 0 2em;
-  overflow: hidden;
   position: relative;
 }
 #fechas li a { display: block; }
