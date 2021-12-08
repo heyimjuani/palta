@@ -56,6 +56,7 @@
 <!-- End Facebook Pixel Code -->
 <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<script src="https://unpkg.com/papaparse@5.3.1/papaparse.min.js"></script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -103,11 +104,30 @@
   </div>
 
   <div class="container">
-    <strong>¿Tenés o sabés de un espacio?</strong><br> Queremos que nos cuentes todo.<br>Te dejamos para que chusmees un poquito más acerca de nosotros.<br>
+    <strong>¿Tenés o sabés de un espacio o movida?</strong><br> Queremos que nos cuentes todo.<br>Te dejamos para que chusmees un poquito más acerca de nosotros.<br>
     <a href="https://www.dropbox.com/s/0eb9c53emlrv1o2/Palta%205%20comp.pdf?dl=1" target="_blank" class="outbound btn-terciary btn-spotify" id="linkGacetilla" onclick="facebookTrackEvent('clickOut');facebookTrackEvent('clickGacetilla');">Descargar gacetilla</a>
   </div>
 
 
+</div>
+
+<div class="wrap">
+  <div class="container">
+    <h2>Próximas fechas <small>En otras localidades</small></h2>
+    <ul id="fechas"></ul>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="container">
+    <h2>Palta en las redes <small>Estamos en todas partes</small></h2>
+    <ul id="social">
+      <li><a href="https://open.spotify.com/artist/6gLZHR1lfosx4paq2mc6rH?si=VT77cxtZTNOeRcpyW1038A" target="_blank" class="social-spotify btn-spotify">Spotify</a></li>
+      <li><a href="http://instagram.com/paltaandthemood" target="_blank" class="social-instagram">Instagram</a></li>
+      <li><a href="https://www.youtube.com/c/PaltatheMood7" target="_blank" class="social-youtube">Youtube</a></li>
+      <li><a href="https://www.facebook.com/paltaandthemood" target="_blank" class="social-facebook">Facebook</a></li>
+    </ul>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -115,6 +135,42 @@
   // options
   //lazyLoad: 2
 //});
+var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQdg3CeEwoFCPTiSuZJZ_BWqxLHA1fyYPixn_QHxaiUgxB1Oac3iQJARiOt8Jf_W6x_5jr96a6ObeHQ/pub?output=csv';
+
+function init() {
+  Papa.parse(public_spreadsheet_url, {
+    download: true,
+    header: true,
+    complete: showInfo
+  })
+}
+
+window.addEventListener('DOMContentLoaded', init)
+
+function showInfo(results) {
+  var data = results.data
+
+  // data comes through as a simple array since simpleSheet is turned on
+  // alert("Successfully processed " + data.length + " rows!")
+  var fechitas = data.map(function (fecha) {
+    var fechaLarga = fecha.fecha;
+    var fechaCorta = fechaLarga.split(/\s+/);
+    var linkTocada = fecha.link;
+    var fechaCompuesta = '<span class="fecha">' + fechaCorta[1].substring(0,3) + '<strong>' + fechaCorta[0] + '</strong></span>';
+    var contenido = fechaCompuesta + fecha.venue_nombre + '<small>' + fecha.localidad + '</small><h6>@' + fecha.venue_IG + '</h6>';
+    // console.log(linkTocada.length < 1);
+    if (linkTocada.length < 1) {
+      return '<li><a class="tix-' + fecha.venue_IG + '" href="https://instagram.com/' + fecha.venue_IG + '" target="_blank">' + contenido + '</a></li>'
+    } else {
+      return '<li><a class="tix-' + fecha.venue_IG + '" href="' + fecha.link + '" target="_blank">' + contenido + '<span class="comprar">Comprar</span></a></li>'
+    }
+  }).join('');
+  // console.log(fechitas);
+  document.getElementById("fechas").innerHTML = fechitas;
+  console.log(data);
+}
+
+//document.write("The published spreadsheet is located at <a target='_new' href='" + public_spreadsheet_url + "'>" + public_spreadsheet_url + "</a>");
 </script>
 
 </body>

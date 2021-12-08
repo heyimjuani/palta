@@ -52,6 +52,15 @@ html, body {
   border-top: 1px solid #fff;
 }
 
+h2 {
+  font-size: 1.25em;
+}
+
+h2 small {
+  display: block;
+  font-weight: normal;
+}
+
 .card h3 {
   margin: 0;
   text-transform: uppercase;
@@ -262,3 +271,77 @@ a:hover {
   transform: translateY(-50%);
   box-shadow: 0px 10px 10px rgba(0,0,0,.1);
 }
+
+#fechas { padding: 0; margin: 0;}
+#fechas li {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2em;
+  overflow: hidden;
+  position: relative;
+}
+#fechas li a { display: block; }
+#fechas li .fecha {
+  float: left;
+  display: block;
+  width: 50px;
+  background: #cc0000;
+  padding: 2px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .75em;
+  text-align: center;
+  margin-right: 1em;
+  position: relative;
+  top: 4px;
+}
+#fechas li .fecha strong {
+  background: #fff;
+  color: #000;
+  display: block;
+  width: 100%;
+  font-size: 2em;
+}
+#fechas li .comprar {
+  background: #1db954;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: .75em;
+  border-radius: 2px;
+  position: absolute;
+  top: calc(50% - 15px);
+  right: 0;
+  padding: 0.5em 1em;
+}
+#fechas li small {
+  display: block;
+  font-weight: normal;
+}
+#fechas li h6 {
+  margin: 0;
+}
+
+#social {
+  padding: 0;
+}
+#social li {
+  list-style: none;
+  padding: 0;
+}
+#social a {
+  background: #fff;
+  color: #000;
+  border: 2px solid #000;
+  text-decoration: none;
+  display: block;
+  border-radius: 3px;
+  padding: 10px 20px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: .9em;
+  letter-spacing: 1px;
+  margin-bottom: .5em;
+}
+#social a.btn-spotify { background: #1db954; border-color:transparent; color: #fff; }
